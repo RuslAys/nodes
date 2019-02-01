@@ -1,4 +1,9 @@
 package task.dao.api;
 
-public interface ConnectionUnitDao {
+import task.entity.ConnectionUnit;
+
+/**
+ * Interface for connection unit data access object
+ */
+public interface ConnectionUnitDao extends GenericDao<ConnectionUnit, Integer> {
 }

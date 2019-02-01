@@ -1,4 +1,9 @@
 package task.dao.api;
 
-public interface NodeDao {
+import task.entity.Node;
+
+/**
+ * Interface for node data access object
+ */
+public interface NodeDao extends GenericDao<Node, Integer>{
 }
