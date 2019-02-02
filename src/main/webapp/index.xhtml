@@ -10,13 +10,35 @@
     <title>Узлы</title>
 </h:head>
 <h:body>
-    <p:dataTable id="nodes" value="#{nodeController.getNodes()}" var="node"
-                 styleClass="nodesTable">
-        <f:facet name="header" styleClass="table-header">
-            Узлы
-        </f:facet>
+    <p:dataTable id="nodes" var="node" value="#{nodeController.getNodes()}">
+        <p:columnGroup type="header">
+            <p:row>
+                <p:column rowspan="2" headerText="Узлы" />
+                <p:column colspan="2" headerText="Расположение" />
+                <p:column colspan="2" headerText="Точки" />
+            </p:row>
+            <p:row>
+                <p:column headerText="Улица" />
+                <p:column headerText="Дом" />
+                <p:column headerText="Всего" />
+                <p:column headerText="Свободно" />
+            </p:row>
+        </p:columnGroup>
+
         <p:column>
             <h:outputText value="#{node.name}" />
+        </p:column>
+        <p:column>
+            <h:outputText value="#{node.street}" />
+        </p:column>
+        <p:column>
+            <h:outputText value="#{node.home}" />
+        </p:column>
+        <p:column>
+            <h:outputText value="#{nodeController.getAllPointsNumber(node)}" />
+        </p:column>
+        <p:column>
+            <h:outputText value="#{nodeController.getEmptyPointsNumber(node)}" />
         </p:column>
     </p:dataTable>
 </h:body>

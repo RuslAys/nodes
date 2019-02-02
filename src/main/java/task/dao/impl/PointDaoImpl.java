@@ -10,7 +10,6 @@ import javax.ejb.TransactionAttributeType;
 
 @Stateless
 @Local(PointDao.class)
-@TransactionAttribute(TransactionAttributeType.REQUIRED)
 public class PointDaoImpl extends GenericDaoImpl<Point, Integer> implements PointDao {
 
 }

@@ -13,7 +13,6 @@ import java.util.List;
 
 @Stateless
 @Local(GenericDao.class)
-@TransactionAttribute(TransactionAttributeType.REQUIRED)
 @SuppressWarnings("unchecked")
 public abstract class GenericDaoImpl<E, K> implements GenericDao<E, K> {
 
@@ -25,9 +24,6 @@ public abstract class GenericDaoImpl<E, K> implements GenericDao<E, K> {
     public GenericDaoImpl(){
         ParameterizedType genericSuperclass = (ParameterizedType) getClass().getGenericSuperclass();
         this.daoType = (Class) genericSuperclass.getActualTypeArguments()[0];
-//        Type t = getClass().getGenericSuperclass();
-//        ParameterizedType pt = (ParameterizedType) t;
-//        this.daoType = (Class) pt.getActualTypeArguments()[0];
     }
 
     public final void setDaoType(Class<E> daoType){

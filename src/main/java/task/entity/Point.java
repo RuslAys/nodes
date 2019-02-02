@@ -1,9 +1,12 @@
 package task.entity;
 
+import javax.persistence.CascadeType;
 import javax.persistence.Column;
 import javax.persistence.Entity;
 import javax.persistence.JoinColumn;
+import javax.persistence.JoinTable;
 import javax.persistence.ManyToOne;
+import javax.persistence.OneToOne;
 import javax.persistence.Table;
 import java.util.Objects;
 
@@ -16,6 +19,10 @@ public class Point extends AbstractPO{
     @ManyToOne
     @JoinColumn(name = "connection_unit_id")
     private ConnectionUnit connectionUnit;
+
+    @OneToOne(cascade = CascadeType.ALL)
+    @JoinColumn(name = "connected_point_id")
+    private Point connectedPoint;
 
     public Integer getNumber() {
         return number;
@@ -31,6 +38,14 @@ public class Point extends AbstractPO{
 
     public void setConnectionUnit(ConnectionUnit connectionUnit) {
         this.connectionUnit = connectionUnit;
+    }
+
+    public Point getConnectedPoint() {
+        return connectedPoint;
+    }
+
+    public void setConnectedPoint(Point connectedPoint) {
+        this.connectedPoint = connectedPoint;
     }
 
     @Override

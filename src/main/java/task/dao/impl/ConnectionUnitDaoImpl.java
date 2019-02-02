@@ -10,6 +10,5 @@ import javax.ejb.TransactionAttributeType;
 
 @Stateless
 @Local(ConnectionUnitDao.class)
-@TransactionAttribute(TransactionAttributeType.REQUIRED)
 public class ConnectionUnitDaoImpl extends GenericDaoImpl<ConnectionUnit, Integer> implements ConnectionUnitDao {
 }
