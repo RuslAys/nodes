@@ -21,9 +21,6 @@ public class DBInit implements Serializable {
     @Inject
     private NodeService nodeService;
 
-    @Inject
-    private ConnectionUnitDao connectionUnitDao;
-
     @PostConstruct
     private void init(){
         // init first node

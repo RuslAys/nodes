@@ -57,4 +57,10 @@ public class NodeServiceImpl implements NodeService {
                 .mapToInt(Set::size)
                 .sum();
     }
+
+    @Override
+    @Transactional(Transactional.TxType.REQUIRED)
+    public Node findWithDependenciesById(int id) {
+        return nodeDao.findNodeWithDependenciesById(id);
+    }
 }

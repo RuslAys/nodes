@@ -26,7 +26,9 @@
         </p:columnGroup>
 
         <p:column>
-            <h:outputText value="#{node.name}" />
+            <h:link value="#{node.name}" outcome="node" >
+                <f:param name="nodeId" value="#{node.id}" />
+            </h:link>
         </p:column>
         <p:column>
             <h:outputText value="#{node.street}" />

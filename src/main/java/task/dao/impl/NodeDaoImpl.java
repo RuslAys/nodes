@@ -27,4 +27,16 @@ public class NodeDaoImpl extends GenericDaoImpl<Node, Integer> implements NodeDa
         }
         return nodes;
     }
+
+    @Override
+    public Node findNodeWithDependenciesById(int id) {
+        Node node = (Node) entityManager.createQuery("SELECT n FROM Node n where n.id = :id")
+                .setParameter("id", id)
+                .getSingleResult();
+        Hibernate.initialize(node.getConnectionUnits());
+        for(ConnectionUnit connectionUnit: node.getConnectionUnits()){
+            Hibernate.initialize(connectionUnit.getPoints());
+        }
+        return node;
+    }
 }

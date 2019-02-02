@@ -1,0 +1,49 @@
+<!DOCTYPE html>
+<html lang="en"
+      xmlns="http://www.w3.org/1999/xhtml"
+      xmlns:jsf="http://xmlns.jcp.org/jsf"
+      xmlns:h="http://xmlns.jcp.org/jsf/html"
+      xmlns:f="http://xmlns.jcp.org/jsf/core"
+      xmlns:ui="http://xmlns.jcp.org/jsf/facelets"
+      xmlns:p="http://primefaces.org/ui">
+<h:head>
+    <title>Узел</title>
+</h:head>
+<h:body>
+    <f:metadata>
+        <f:viewParam name="nodeId" value="#{nodeController.nodeId}" />
+        <f:viewAction action="#{nodeController.loadNodeWithFullInformation()}"  immediate=""/>
+    </f:metadata>
+    <h1> <h:outputText value="Узел: #{nodeController.node.name}" /></h1>
+    <h2> <h:outputText value="Регион: #{nodeController.node.region}" /></h2>
+    <h2> <h:outputText value="Улица: #{nodeController.node.street}" /></h2>
+    <h2> <h:outputText value="Дом: #{nodeController.node.home}" /></h2>
+    <p:dataTable id="units" var="unit" value="#{nodeController.node.connectionUnits}">
+        <f:facet name="header" styleClass="table-header">
+            <h:outputText value="Коммутаторы на узле" />
+        </f:facet>
+        <p:column headerText="Коммутатор">
+            <h:outputText value="#{unit.name}" />
+        </p:column>
+        <p:column headerText="Емкость">
+            <h:outputText value="#{unit.capacity}" />
+        </p:column>
+    </p:dataTable>
+
+    <p:dataTable id="points" var="point" value="#{nodeController.getPointsWithLinks()}">
+        <f:facet name="header" styleClass="table-header">
+            <h:outputText value="Точки" />
+        </f:facet>
+        <p:column headerText="Коммутатор">
+            <h:outputText value="#{point.connectionUnit.name}" />
+        </p:column>
+        <p:column headerText="Номер точки">
+            <h:outputText value="#{point.number}" />
+        </p:column>
+        <p:column headerText="Связь">
+            <h:outputText value="#{point.connectedPoint}" />
+        </p:column>
+    </p:dataTable>
+
+</h:body>
+</html>

@@ -82,4 +82,9 @@ public class Node extends AbstractPO{
     public int hashCode() {
         return Objects.hash(name, region, street, home);
     }
+
+    @Override
+    public String toString() {
+        return name;
+    }
 }

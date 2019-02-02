@@ -13,4 +13,11 @@ public interface NodeDao extends GenericDao<Node, Integer>{
      * @return list with nodes
      */
     List<Node> findAllWithDependencies();
+
+    /**
+     * Find node with connection units by id
+     * @param id node`s id
+     * @return node with dependencies
+     */
+    Node findNodeWithDependenciesById(int id);
 }

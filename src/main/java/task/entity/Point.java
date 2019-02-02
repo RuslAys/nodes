@@ -61,4 +61,10 @@ public class Point extends AbstractPO{
     public int hashCode() {
         return Objects.hash(number, connectionUnit);
     }
+
+    @Override
+    public String toString() {
+        return "Коммутатор: " + connectionUnit.getName() +
+                " номер: " + number;
+    }
 }
