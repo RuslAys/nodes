@@ -47,7 +47,7 @@
             <h:outputText value="#{point.number}" />
         </p:column>
         <p:column headerText="Связь" style = "width=50%">
-            <h:outputText value="#{point.connectedPoint.connectionUnit.node.name}: #{point.connectedPoint.connectionUnit.name}_#{point.connectedPoint.number}" />
+            <h:outputText value="#{point.connectedPoint.connectionUnit.node.name}: #{point.connectedPoint.connectionUnit.name}, #{point.connectedPoint.number}" />
         </p:column>
     </p:dataTable>
 

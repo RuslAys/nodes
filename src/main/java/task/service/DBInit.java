@@ -1,6 +1,5 @@
 package task.service;
 
-import task.dao.api.ConnectionUnitDao;
 import task.entity.ConnectionUnit;
 import task.entity.Node;
 import task.entity.Point;
@@ -14,6 +13,9 @@ import java.io.Serializable;
 import java.util.HashSet;
 import java.util.Set;
 
+/**
+ * Class for fill database with test data
+ */
 @Singleton
 @Startup
 public class DBInit implements Serializable {
@@ -63,16 +65,13 @@ public class DBInit implements Serializable {
         point22.setConnectionUnit(connectionUnit2);
         connectionUnit2.getPoints().add(point22);
 
-        point11.setConnectedPoint(point21);
-        point21.setConnectedPoint(point11);
+
 
         Set<ConnectionUnit> connectionUnits = new HashSet<>();
         connectionUnits.add(connectionUnit1);
         connectionUnits.add(connectionUnit2);
         connectionUnits.forEach(connectionUnit -> connectionUnit.setNode(node1));
         node1.getConnectionUnits().addAll(connectionUnits);
-
-        nodeService.add(node1);
 
         //init second node
         Node node2 = new Node();
@@ -109,8 +108,11 @@ public class DBInit implements Serializable {
         point42.setConnectionUnit(connectionUnit4);
         connectionUnit2.getPoints().add(point42);
 
-        point31.setConnectedPoint(point41);
-        point41.setConnectedPoint(point31);
+        point11.setConnectedPoint(point31);
+        point31.setConnectedPoint(point11);
+
+        point21.setConnectedPoint(point41);
+        point41.setConnectedPoint(point21);
 
         Set<ConnectionUnit> connectionUnits2 = new HashSet<>();
         connectionUnits2.add(connectionUnit3);
@@ -118,6 +120,38 @@ public class DBInit implements Serializable {
         connectionUnits2.forEach(connectionUnit -> connectionUnit.setNode(node2));
         node2.getConnectionUnits().addAll(connectionUnits2);
 
+        //init third node
+        Node node3 = new Node();
+        node3.setName("Узел 3");
+        node3.setRegion("Центральный");
+        node3.setStreet("Ленина");
+        node3.setHome("1 к.1");
+
+        ConnectionUnit connectionUnit5 = new ConnectionUnit();
+        connectionUnit5.setName("CU_5");
+        connectionUnit5.setCapacity(2);
+
+        Point point51 = new Point();
+        point51.setNumber(1);
+        point51.setConnectionUnit(connectionUnit5);
+        connectionUnit3.getPoints().add(point51);
+
+        Point point52 = new Point();
+        point52.setNumber(2);
+        point52.setConnectionUnit(connectionUnit5);
+        connectionUnit3.getPoints().add(point52);
+
+        connectionUnit5.setNode(node3);
+        node3.getConnectionUnits().add(connectionUnit5);
+
+        point51.setConnectedPoint(point42);
+        point42.setConnectedPoint(point51);
+
+        point52.setConnectedPoint(point12);
+        point12.setConnectedPoint(point52);
+
+        nodeService.add(node1);
         nodeService.add(node2);
+        nodeService.add(node3);
     }
 }
