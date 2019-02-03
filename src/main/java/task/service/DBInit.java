@@ -23,6 +23,9 @@ public class DBInit implements Serializable {
     @Inject
     private NodeService nodeService;
 
+    /**
+     * Method to init data
+     */
     @PostConstruct
     private void init(){
         // init first node

@@ -13,18 +13,15 @@ import java.util.List;
 import java.util.Set;
 import java.util.stream.Collectors;
 
+/**
+ * Class to work with nodes implements NodeService
+ */
 @Stateless
 @Local(NodeService.class)
 public class NodeServiceImpl implements NodeService {
 
     @Inject
     private NodeDao nodeDao;
-
-    @Override
-    @Transactional(Transactional.TxType.REQUIRED)
-    public List<Node> findAll() {
-        return nodeDao.findAll();
-    }
 
     @Override
     @Transactional(Transactional.TxType.REQUIRED)
