@@ -5,10 +5,11 @@ import task.entity.Point;
 import task.service.api.NodeService;
 import task.service.api.PointService;
 
-import javax.enterprise.context.SessionScoped;
 import javax.faces.bean.ManagedBean;
+import javax.faces.bean.SessionScoped;
 import javax.inject.Inject;
 import java.io.Serializable;
+import java.util.HashSet;
 import java.util.List;
 import java.util.Set;
 
@@ -24,6 +25,7 @@ public class NodeController implements Serializable {
 
     private int nodeId;
     private Node node;
+    private Set<Point> points;
 
     public List<Node> getNodes(){
         return nodeService.findAllWithDependencies();
@@ -57,7 +59,14 @@ public class NodeController implements Serializable {
         this.node = nodeService.findWithDependenciesById(this.nodeId);
     }
 
+    public void loadPointsWithLinks(){
+        this.points = pointService.getPointsWithLinks(this.node.getConnectionUnits());
+    }
+
     public Set<Point> getPointsWithLinks(){
-        return pointService.getPointsWithLinks(this.node.getConnectionUnits());
+        if (points == null){
+            return new HashSet<>();
+        }
+        return this.points;
     }
 }

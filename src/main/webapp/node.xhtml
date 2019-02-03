@@ -7,14 +7,14 @@
       xmlns:ui="http://xmlns.jcp.org/jsf/facelets"
       xmlns:p="http://primefaces.org/ui">
 <h:head>
-    <title>Узел</title>
+    <title>Информация об узле</title>
 </h:head>
 <h:body>
     <f:metadata>
         <f:viewParam name="nodeId" value="#{nodeController.nodeId}" />
         <f:viewAction action="#{nodeController.loadNodeWithFullInformation()}"  immediate=""/>
     </f:metadata>
-    <h1> <h:outputText value="Узел: #{nodeController.node.name}" /></h1>
+    <h1> <h:outputText value="Имя: #{nodeController.node.name}" /></h1>
     <h2> <h:outputText value="Регион: #{nodeController.node.region}" /></h2>
     <h2> <h:outputText value="Улица: #{nodeController.node.street}" /></h2>
     <h2> <h:outputText value="Дом: #{nodeController.node.home}" /></h2>
@@ -30,18 +30,24 @@
         </p:column>
     </p:dataTable>
 
+    <h:form>
+        <h:commandButton value="Показать связи" action="#{nodeController.loadPointsWithLinks()}">
+            <f:ajax render="points"/>
+        </h:commandButton>
+    </h:form>
+
     <p:dataTable id="points" var="point" value="#{nodeController.getPointsWithLinks()}">
         <f:facet name="header" styleClass="table-header">
-            <h:outputText value="Точки" />
+            <h:outputText value="Связи" />
         </f:facet>
-        <p:column headerText="Коммутатор">
+        <p:column headerText="Коммутатор" style = "width=25%">
             <h:outputText value="#{point.connectionUnit.name}" />
         </p:column>
-        <p:column headerText="Номер точки">
+        <p:column headerText="Номер точки" style = "width=25%">
             <h:outputText value="#{point.number}" />
         </p:column>
-        <p:column headerText="Связь">
-            <h:outputText value="#{point.connectedPoint}" />
+        <p:column headerText="Связь" style = "width=50%">
+            <h:outputText value="#{point.connectedPoint.connectionUnit.node.name}: #{point.connectedPoint.connectionUnit.name}_#{point.connectedPoint.number}" />
         </p:column>
     </p:dataTable>
 

@@ -61,6 +61,11 @@ public class NodeServiceImpl implements NodeService {
     @Override
     @Transactional(Transactional.TxType.REQUIRED)
     public Node findWithDependenciesById(int id) {
-        return nodeDao.findNodeWithDependenciesById(id);
+        try {
+            return nodeDao.findNodeWithDependenciesById(id);
+        }catch (Exception e){
+            e.printStackTrace();
+            return null;
+        }
     }
 }
